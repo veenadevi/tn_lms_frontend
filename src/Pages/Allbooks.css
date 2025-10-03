@@ -1,0 +1,45 @@
+.books-page {
+  padding: 32px;
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+
+.books-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.books-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.books-table th, .books-table td {
+  border: 1px solid #ddd;
+  padding: 12px 8px;
+  text-align: left;
+}
+
+.books-table th {
+  background: #0074d9;
+  color: #fff;
+  font-weight: 600;
+}
+.books-header {
+  text-align: center;
+  margin-bottom: 16px;
+  margin-top: 35px;
+}
+
+.books-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.books-table tr:hover {
+  background: #e6f7ff;
+}
