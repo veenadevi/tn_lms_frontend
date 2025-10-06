@@ -34,6 +34,7 @@ function Allbooks() {
             <tr>
               <th>S.No</th>
               <th>Book Name</th>
+              <th>Book Id</th>
               <th>Author</th>
               <th>Categories</th>
               <th>Copies Available</th>
@@ -45,6 +46,7 @@ function Allbooks() {
               <tr key={book._id || idx}>
                 <td>{idx + 1}</td>
                 <td>{book.bookName}</td>
+                <td>{book.bookId}</td>
                 <td>{book.author}</td>
                 <td>
                   {Array.isArray(book.categories)

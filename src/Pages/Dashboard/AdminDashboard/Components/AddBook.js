@@ -11,6 +11,7 @@ function AddBook() {
     const { user } = useContext(AuthContext)
 
     const [bookName, setBookName] = useState("")
+    const [bookId, setBookId] = useState("")
     const [alternateTitle, setAlternateTitle] = useState("")
     const [author, setAuthor] = useState("")
     const [bookCountAvailable, setBookCountAvailable] = useState(null)

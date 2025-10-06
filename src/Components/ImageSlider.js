@@ -1,6 +1,11 @@
 import React from 'react'
 import './ImageSlider.css'
 import { Carousel } from 'react-bootstrap'
+import carousal_1 from '../img/banner_1.png' // Correct import
+import carousal_2 from '../img/banner_2.png' // Correct import
+import carousal_3 from '../img/banner_3.png' // Correct import
+import { colors } from '@material-ui/core'
+
 
 function ImageSlider() {
     return (
@@ -9,34 +14,34 @@ function ImageSlider() {
                 <Carousel.Item interval={1000}>
                     <img
                         className="d-block w-100"
-                        src="https://images.unsplash.com/photo-1616070152767-3eb99cf10509?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                        src={carousal_1}
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h3>புத்துலகம் படைக்க புத்தகம் படிப்போம் - அப்துல் கலாம்.</h3>
+                       
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item interval={500}>
                     <img
                         className="d-block w-100"
-                        src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80"
+                        src={carousal_2}
                         alt="Second slide"
                     />
                     <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h3>அறிவால் உயர்ந்து அரியாசனம் செய்வோம் - தேசத்தந்தை மகாத்மா காந்தி.</h3>
+                        
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src="https://images.unsplash.com/photo-1608454367599-c133fcab1245?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                        src={carousal_3}
                         alt="Third slide"
                     />
                     <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        <h3>புத்தகங்கள் - நீங்கள் கைகளில் ஏந்தியிருக்கும் கனவுகள். – Neil Gaiman</h3>
+                        
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

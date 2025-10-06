@@ -132,7 +132,7 @@ function AddTransaction() {
             try {
                 const response = await axios.get(API_URL + "api/users/allmembers")
                 const all_members = await response.data.map(member => (
-                    { value: `${member?._id}`, text: `${member?.userType === "Student" ? `${member?.userFullName}[${member?.admissionId}]` : `${member?.userFullName}[${member?.employeeId}]`}` }
+                    { value: `${member?._id}`, text: `${member?.userType === "Student" ? `${member?.userFullName}[${member?.admissionId}]` : `${member?.userFullName}[${member?.admissionId}]`}` }
                 ))
                 setAllMembers(all_members)
             }
@@ -205,17 +205,69 @@ function AddTransaction() {
                         <th>Fine</th>
                     </tr>
                     {
-                        borrowerDetails.activeTransactions?.filter((data) => { return data.transactionStatus === "Active" }).map((data, index) => {
+                        (() => {
+                            const activeList = borrowerDetails.activeTransactions?.filter((data) => data.transactionStatus === "Active") || []
+                            const issuedList = activeList.filter(d => d.transactionType === "Issued")
+                            const reservedList = activeList.filter(d => d.transactionType === "Reserved")
+
+                            // If there are no active transactions at all, show both messages
+                            if (activeList.length === 0) {
+                                return (
+                                    <>
+                                        <tr>
+                                            <td colSpan={5} style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>No books Issued</td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan={5} style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>No books Reserved</td>
+                                        </tr>
+                                    </>
+                                )
+                            }
+
                             return (
-                                <tr key={index}>
-                                    <td>{data.bookName}</td>
-                                    <td>{data.transactionType}</td>
-                                    <td>{data.fromDate}</td>
-                                    <td>{data.toDate}</td>
-                                    <td>{(Math.floor((Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate)) / 86400000)) <= 0 ? 0 : (Math.floor((Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate)) / 86400000)) * 10}</td>
-                                </tr>
+                                <>
+                                    {/* Issued Section */}
+                                    <tr>
+                                        <td colSpan={5} style={{ fontWeight: '700', background: '#f5f5f5' }}>Issued</td>
+                                    </tr>
+                                    {issuedList.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={5} style={{ textAlign: 'center', color: 'gray' }}>No books Issued</td>
+                                        </tr>
+                                    ) : (
+                                        issuedList.map((data, index) => (
+                                            <tr key={`issued-${index}`}>
+                                                <td>{data.bookName}</td>
+                                                <td>{data.transactionType}</td>
+                                                <td>{data.fromDate}</td>
+                                                <td>{data.toDate}</td>
+                                                <td>{(Math.floor((Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate)) / 86400000)) <= 0 ? 0 : (Math.floor((Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate)) / 86400000)) * 10}</td>
+                                            </tr>
+                                        ))
+                                    )}
+
+                                    {/* Reserved Section */}
+                                    <tr>
+                                        <td colSpan={5} style={{ fontWeight: '700', background: '#f5f5f5' }}>Reserved</td>
+                                    </tr>
+                                    {reservedList.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={5} style={{ textAlign: 'center', color: 'gray' }}>No books Reserved</td>
+                                        </tr>
+                                    ) : (
+                                        reservedList.map((data, index) => (
+                                            <tr key={`reserved-${index}`}>
+                                                <td>{data.bookName}</td>
+                                                <td>{data.transactionType}</td>
+                                                <td>{data.fromDate}</td>
+                                                <td>{data.toDate}</td>
+                                                <td>{(Math.floor((Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate)) / 86400000)) <= 0 ? 0 : (Math.floor((Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate)) / 86400000)) * 10}</td>
+                                            </tr>
+                                        ))
+                                    )}
+                                </>
                             )
-                        })
+                        })()
                     }
                 </table>
 

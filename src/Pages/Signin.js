@@ -41,7 +41,7 @@ function Signin() {
                     <h2 className="signin-title"> Log in</h2>
                     <p className="line"></p>
                     <div className="persontype-question">
-                        <p>Are you a Staff member ?</p>
+                        <p>Are you a Student ?</p>
                         <Switch
                             onChange={() => setIsStudent(!isStudent)}
                             color="primary"
@@ -49,8 +49,8 @@ function Signin() {
                     </div>
                     <div className="error-message"><p>{error}</p></div>
                     <div className="signin-fields">
-                        <label htmlFor={isStudent?"admissionId":"employeeId"}> <b>{isStudent?"Admission ID":"Employee ID"}</b></label>
-                        <input className='signin-textbox' type="text" placeholder={isStudent?"Enter Admission ID":"Enter Employee ID"} name={isStudent?"admissionId":"employeeId"} required onChange={(e) => { isStudent?setAdmissionId(e.target.value):setEmployeeId(e.target.value) }}/>
+                        <label htmlFor={isStudent?"admissionId":"employeeId"}> <b>{isStudent?"Admission ID":"Student ID"}</b></label>
+                        <input className='signin-textbox' type="text" placeholder={isStudent?"Enter Admission ID":"Enter Student ID"} name={isStudent?"admissionId":"employeeId"} required onChange={(e) => { isStudent?setAdmissionId(e.target.value):setEmployeeId(e.target.value) }}/>
                         <label htmlFor="password"><b>Password</b></label>
                         <input className='signin-textbox' type="password" minLength='6' placeholder="Enter Password" name="psw" required onChange={(e) => { setPassword(e.target.value) }} />
                         </div>

@@ -12,23 +12,13 @@ function About() {
                 </div>
                 <div>
                     <p className="about-text">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting 
-                        industry. Lorem Ipsum has been the industry's standard dummy text 
-                        ever since the 1500s, when an unknown printer took a galley of type 
-                        and scrambled it to make a type specimen book. It has survived not 
-                        only five centuries.<br/>
+                        பள்ளி நூலகம் என்பது மாணவர்கள் பாடப்புத்தகங்களுக்கு அப்பாற்பட்டு அறிவை வளர்த்துக்கொள்ளும் அறிவுக் களஞ்சியம் ஆகும். இதில் கதைகள், பாடப்புத்தகங்கள் தொடர்பான குறிப்புகள், செய்தித்தாள்கள், இதழ்கள் போன்றவை இடம்பெற்று, மாணவர்களின் வாசிப்பு பழக்கத்தை மேம்படுத்துகிறது.<br/>
                         <br/>
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                        It has roots in a piece of classical Latin literature from 45 BC, 
-                        making it over 2000 years old. Richard McClintock, a Latin professor 
-                        at Hampden-Sydney College in Virginia, looked up one of the more obscure 
-                        Latin words, consectetur, from a Lorem Ipsum passage.<br/>
+                       தமிழ் மற்றும் ஆங்கில நூல்கள் மாணவர்களுக்கு எளிதில் புரிந்து கொள்ளவும், மொழித் திறனை மேம்படுத்தவும் உதவுகின்றன. அமைதியான சூழலில் நூலகம் கவனம், ஒழுக்கம், சுயமாகப் படிக்கும் பழக்கத்தை வளர்க்கிறது. நூலகர் வழிகாட்டுதலுடன் மாணவர்கள் பயனுள்ள நூல்களை தேர்வு செய்து படிக்கலாம்.<br/>
                         <br/>
-                        There are many variations of passages of Lorem Ipsum available, 
-                        but the majority have suffered alteration in some form, by injected 
-                        humour<br/>
+                        சிறந்த நூலகம் மாணவர்களுக்கு தன்னம்பிக்கை, படைப்பாற்றல் மற்றும் வாழ்நாள் முழுதும் கற்றுக் கொள்வதற்கான பழக்கத்தை வழங்குகிறது.<br/>
                         <br/>
-                        Your suggestions for improvement are always welcome!
+                        அறிவே செல்வம்!
                     </p>
                 </div>
             </div>

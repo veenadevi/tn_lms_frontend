@@ -25,7 +25,7 @@ function Return() {
             try {
                 const response = await axios.get(API_URL + "api/users/allmembers")
                 setAllMembersOptions(response.data.map((member) => (
-                    { value: `${member?._id}`, text: `${member?.userType === "Student" ? `${member?.userFullName}[${member?.admissionId}]` : `${member?.userFullName}[${member?.employeeId}]`}` }
+                    { value: `${member?._id}`, text: `${member?.userType === "Student" ? `${member?.userFullName}[${member?.admissionId}]` : `${member?.userFullName}[${member?.admissionId}]`}` }
                 )))
             }
             catch (err) {
@@ -141,25 +141,36 @@ function Return() {
                         <th></th>
                     </tr>
                     {
-                        allTransactions?.filter((data)=>{
-                            if(borrowerId === null){
-                                return data.transactionType === "Issued"
+                        (() => {
+                            const issuedList = allTransactions?.filter((data) => {
+                                if (borrowerId === null) {
+                                    return data.transactionType === "Issued"
+                                } else {
+                                    return data.borrowerId === borrowerId && data.transactionType === "Issued"
+                                }
+                            }) || []
+
+                            if (issuedList.length === 0) {
+                                return (
+                                    <tr>
+                                        <td colSpan={6} style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>No books Issued</td>
+                                    </tr>
+                                )
                             }
-                            else{
-                                return data.borrowerId === borrowerId && data.transactionType === "Issued"
-                            }
-                        }).map((data, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{data.bookName}</td>
-                                    <td>{data.borrowerName}</td>
-                                    <td>{data.fromDate}</td>
-                                    <td>{data.toDate}</td>
-                                    <td>{(Math.floor(( Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate) ) / 86400000)) <= 0 ? 0 : (Math.floor(( Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate) ) / 86400000))*10}</td>
-                                    <td><button onClick={()=>{returnBook(data._id,data.borrowerId,data.bookId,(Math.floor(( Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate) ) / 86400000)))}}>Return</button></td>
-                                </tr>
-                            )
-                        })
+
+                            return issuedList.map((data, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{data.bookName}</td>
+                                        <td>{data.borrowerName}</td>
+                                        <td>{data.fromDate}</td>
+                                        <td>{data.toDate}</td>
+                                        <td>{(Math.floor(( Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate) ) / 86400000)) <= 0 ? 0 : (Math.floor(( Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate) ) / 86400000))*10}</td>
+                                        <td><button onClick={()=>{returnBook(data._id,data.borrowerId,data.bookId,(Math.floor(( Date.parse(moment(new Date()).format("MM/DD/YYYY")) - Date.parse(data.toDate) ) / 86400000)))}}>Return</button></td>
+                                    </tr>
+                                )
+                            })
+                        })()
                     }
                 </table>
                 <p className="dashboard-option-title">Reserved</p>
@@ -172,24 +183,35 @@ function Return() {
                         <th></th>
                     </tr>
                     {
-                        allTransactions?.filter((data)=>{
-                            if(borrowerId === null){
-                                return data.transactionType === "Reserved"
+                        (() => {
+                            const reservedList = allTransactions?.filter((data) => {
+                                if (borrowerId === null) {
+                                    return data.transactionType === "Reserved"
+                                } else {
+                                    return data.borrowerId === borrowerId && data.transactionType === "Reserved"
+                                }
+                            }) || []
+
+                            if (reservedList.length === 0) {
+                                return (
+                                    <tr>
+                                        <td colSpan={5} style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>No books Reserved</td>
+                                    </tr>
+                                )
                             }
-                            else{
-                                return data.borrowerId === borrowerId && data.transactionType === "Reserved"
-                            }
-                        }).map((data, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{data.bookName}</td>
-                                    <td>{data.borrowerName}</td>
-                                    <td>{data.fromDate}</td>
-                                    <td>{data.toDate}</td>
-                                    <td><button onClick={()=>{convertToIssue(data._id)}}>Convert</button></td>
-                                </tr>
-                            )
-                        })
+
+                            return reservedList.map((data, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{data.bookName}</td>
+                                        <td>{data.borrowerName}</td>
+                                        <td>{data.fromDate}</td>
+                                        <td>{data.toDate}</td>
+                                        <td><button onClick={()=>{convertToIssue(data._id)}}>Convert</button></td>
+                                    </tr>
+                                )
+                            })
+                        })()
                     }
                 </table>
         </div>

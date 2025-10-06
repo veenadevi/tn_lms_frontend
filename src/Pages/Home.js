@@ -19,11 +19,11 @@ function Home() {
             <About/>
             <Stats/>
             <RecentAddedBooks/>
-            <PopularBooks/>
+            {/* <PopularBooks/>
             <ReservedBooks/>
             <News/>
             <PhotoGallery/>
-            <Footer/>
+            <Footer/> */}
         </div>
     )
 }

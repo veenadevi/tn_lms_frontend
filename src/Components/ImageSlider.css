@@ -8,9 +8,24 @@ img{
     height: 500px;
 }
 
+/* Caption paragraph styling scoped to the slider */
+.slider .carousel-caption h3 {
+    font-size: 18px;
+    color:black;
+    line-height: 1.4;
+    margin: 8px 0 0 0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Mobile View */
 @media screen and (max-width:768px){
     img{
         height: 250px;
+    }
+    .slider .carousel-caption p {
+        font-size: 14px;
     }
 }
