@@ -217,6 +217,23 @@
   color: red;
 }
 
+/* Add Book form grid: 2 columns on desktop, 1 column on mobile */
+.addbook-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.addbook-form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+@media screen and (max-width: 768px) {
+  .addbook-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .dashboard-addbooks-content,
 .dashboard-transactions-content {
   display: flex;

@@ -5,12 +5,14 @@ import { Dropdown } from 'semantic-ui-react'
 import '../../MemberDashboard/MemberDashboard.css'
 import moment from "moment"
 import { AuthContext } from '../../../../Context/AuthContext'
+import { useToast } from '../../../../Context/ToastContext'
 
 
 function Return() {
 
     const API_URL = process.env.REACT_APP_API_URL
     const { user } = useContext(AuthContext)
+    const { addToast } = useToast()
 
     const [allTransactions, setAllTransactions] = useState([])
     const [ExecutionStatus, setExecutionStatus] = useState(null) /* For triggering the tabledata to be updated */ 
@@ -95,7 +97,7 @@ function Return() {
             })
 
             setExecutionStatus("Completed");
-            alert("Book returned to the library successfully")
+            addToast("Book returned to the library successfully", { type: 'success' })
         }
         catch(err){
             console.log(err)
@@ -109,7 +111,7 @@ function Return() {
                 isAdmin:user.isAdmin
             })
             setExecutionStatus("Completed");
-            alert("Book issued succesfully 🎆")
+            addToast("Book issued successfully 🎆", { type: 'success' })
         }
         catch(err){
             console.log(err)

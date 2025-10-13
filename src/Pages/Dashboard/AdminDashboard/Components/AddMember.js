@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "../AdminDashboard.css"
 import axios from "axios"
 import { Dropdown } from 'semantic-ui-react'
+import { useToast } from '../../../../Context/ToastContext'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
@@ -30,6 +31,8 @@ function AddMember() {
         { value: "Male", text: "Male" },
         { value: "Female", text: "Female" }
     ]
+
+    const { addToast } = useToast()
 
     const userTypes = [
         { value: 'Staff', text: 'Staff' },
@@ -67,19 +70,19 @@ function AddMember() {
                 setAddress(null)
                 setMobileNumber(null)
                 setEmail(null)
-                setPassword(null)
                 setGender(null)
                 setAge(null)
                 setDob(null)
                 setDobString(null)
-                alert("Member Added")
+                addToast("Member Added", { type: 'success' })
             }
             catch (err) {
                 console.log(err)
+                addToast('Failed to add member', { type: 'error' })
             }
         }
         else {
-            alert("All the fields must be filled")
+            addToast("All the fields must be filled", { type: 'error' })
         }
         setIsLoading(false)
     }

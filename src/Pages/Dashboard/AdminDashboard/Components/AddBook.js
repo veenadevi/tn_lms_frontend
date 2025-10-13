@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "../AdminDashboard.css"
 import axios from "axios"
 import { AuthContext } from '../../../../Context/AuthContext'
+import { useToast } from '../../../../Context/ToastContext'
 import { Dropdown } from 'semantic-ui-react'
 
 function AddBook() {
@@ -9,6 +10,7 @@ function AddBook() {
     const API_URL = process.env.REACT_APP_API_URL
     const [isLoading, setIsLoading] = useState(false)
     const { user } = useContext(AuthContext)
+    const { addToast } = useToast()
 
     const [bookName, setBookName] = useState("")
     const [bookId, setBookId] = useState("")
@@ -69,7 +71,7 @@ function AddBook() {
             setPrice("")
             setPublisher("")
             setSelectedCategories([])
-            alert("Book Added Successfully 🎉")
+            addToast("Book Added Successfully 🎉", { type: 'success' })
         }
         catch (err) {
             console.log(err)
@@ -92,44 +94,62 @@ function AddBook() {
             <p className="dashboard-option-title">Add a Book</p>
             <div className="dashboard-title-line"></div>
             <form className='addbook-form' onSubmit={addBook}>
+                <div className="addbook-form-grid">
+                    <div>
+                        <label className="addbook-form-label" htmlFor="bookName">Book Name<span className="required-field">*</span></label>
+                        <input className="addbook-form-input" type="text" name="bookName" value={bookName} onChange={(e) => { setBookName(e.target.value) }} required />
+                    </div>
 
-                <label className="addbook-form-label" htmlFor="bookName">Book Name<span className="required-field">*</span></label><br />
-                <input className="addbook-form-input" type="text" name="bookName" value={bookName} onChange={(e) => { setBookName(e.target.value) }} required></input><br />
+                    <div>
+                        <label className="addbook-form-label" htmlFor="alternateTitle">Alternate Title</label>
+                        <input className="addbook-form-input" type="text" name="alternateTitle" value={alternateTitle} onChange={(e) => { setAlternateTitle(e.target.value) }} />
+                    </div>
 
-                <label className="addbook-form-label" htmlFor="alternateTitle">AlternateTitle</label><br />
-                <input className="addbook-form-input" type="text" name="alternateTitle" value={alternateTitle} onChange={(e) => { setAlternateTitle(e.target.value) }}></input><br />
+                    <div>
+                        <label className="addbook-form-label" htmlFor="author">Author Name<span className="required-field">*</span></label>
+                        <input className="addbook-form-input" type="text" name="author" value={author} onChange={(e) => { setAuthor(e.target.value) }} required />
+                    </div>
 
-                <label className="addbook-form-label" htmlFor="author">Author Name<span className="required-field">*</span></label><br />
-                <input className="addbook-form-input" type="text" name="author" value={author} onChange={(e) => { setAuthor(e.target.value) }} required></input><br />
+                    <div>
+                        <label className="addbook-form-label" htmlFor="language">Language</label>
+                        <input className="addbook-form-input" type="text" name="language" value={language} onChange={(e) => { setLanguage(e.target.value) }} />
+                    </div>
 
-                <label className="addbook-form-label" htmlFor="language">Language</label><br />
-                <input className="addbook-form-input" type="text" name="language" value={language} onChange={(e) => { setLanguage(e.target.value) }}></input><br />
+                    <div>
+                        <label className="addbook-form-label" htmlFor="price">Price</label>
+                        <input className="addbook-form-input" type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
+                    </div>
 
-                <label className="addbook-form-label" htmlFor="Price">Price</label><br />
-                <input className="addbook-form-input" type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }}></input><br />
+                    <div>
+                        <label className="addbook-form-label" htmlFor="publisher">Publisher</label>
+                        <input className="addbook-form-input" type="text" name="publisher" value={publisher} onChange={(e) => { setPublisher(e.target.value) }} />
+                    </div>
 
+                    <div>
+                        <label className="addbook-form-label" htmlFor="copies">No.of Copies Available<span className="required-field">*</span></label>
+                        <input className="addbook-form-input" type="text" name="copies" value={bookCountAvailable} onChange={(e) => { setBookCountAvailable(e.target.value) }} required />
+                    </div>
 
-                <label className="addbook-form-label" htmlFor="publisher">Publisher</label><br />
-                <input className="addbook-form-input" type="text" name="publisher" value={publisher} onChange={(e) => { setPublisher(e.target.value) }}></input><br />
+                    <div>
+                        <label className="addbook-form-label" htmlFor="categories">Categories<span className="required-field">*</span></label>
+                        <div className="semanticdropdown">
+                            <Dropdown
+                                placeholder='Category'
+                                fluid
+                                multiple
+                                search
+                                selection
+                                options={allCategories}
+                                value={selectedCategories}
+                                onChange={(event, value) => setSelectedCategories(value.value)}
+                            />
+                        </div>
+                    </div>
 
-                <label className="addbook-form-label" htmlFor="copies">No.of Copies Available<span className="required-field">*</span></label><br />
-                <input className="addbook-form-input" type="text" name="copies" value={bookCountAvailable} onChange={(e) => { setBookCountAvailable(e.target.value) }} required></input><br />
-
-                <label className="addbook-form-label" htmlFor="categories">Categories<span className="required-field">*</span></label><br />
-                <div className="semanticdropdown">
-                    <Dropdown
-                        placeholder='Category'
-                        fluid
-                        multiple
-                        search
-                        selection
-                        options={allCategories}
-                        value={selectedCategories}
-                        onChange={(event, value) => setSelectedCategories(value.value)}
-                    />
+                    <div className="full-width" style={{ textAlign: 'center' }}>
+                        <input className="addbook-submit" type="submit" value="SUBMIT" disabled={isLoading} />
+                    </div>
                 </div>
-
-                <input className="addbook-submit" type="submit" value="SUBMIT" disabled={isLoading}></input>
             </form>
             <div>
                 <p className="dashboard-option-title">Recently Added Books</p>

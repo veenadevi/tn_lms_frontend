@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "../AdminDashboard.css"
 import axios from "axios"
 import { AuthContext } from '../../../../Context/AuthContext'
+import { useToast } from '../../../../Context/ToastContext'
 import { Dropdown } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,6 +13,7 @@ function AddTransaction() {
     const API_URL = process.env.REACT_APP_API_URL
     const [isLoading, setIsLoading] = useState(false)
     const { user } = useContext(AuthContext)
+    const { addToast } = useToast()
 
     const [borrowerId, setBorrowerId] = useState("")
     const [borrowerDetails, setBorrowerDetails] = useState([])
@@ -76,18 +78,18 @@ function AddTransaction() {
                     setToDate(null)
                     setFromDateString(null)
                     setToDateString(null)
-                    alert("Transaction was Successfull 🎉")
+                    addToast("Transaction was Successful 🎉", { type: 'success' })
                 }
                 catch (err) {
                     console.log(err)
                 }
             }
             else{
-                alert("The book is not available")
+                addToast("The book is not available", { type: 'error' })
             }
         }
         else {
-            alert("Fields must not be empty")
+            addToast("Fields must not be empty", { type: 'error' })
         }
         setIsLoading(false)
     }

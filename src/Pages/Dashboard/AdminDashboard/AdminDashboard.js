@@ -14,6 +14,7 @@ import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import GetMember from './Components/GetMember';
+import BulkBooks from './Components/BulkBooks';
 import AssignmentReturnIcon from '@material-ui/icons/AssignmentReturn';
 import Return from './Components/Return';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
@@ -58,6 +59,7 @@ function AdminDashboard() {
                     <p className={`dashboard-option ${active === "getmember" ? "clicked" : ""}`} onClick={() => { setActive("getmember"); setSidebar(false) }}><AccountBoxIcon className='dashboard-option-icon' /> Get Member </p>
                     <p className={`dashboard-option ${active === "addmember" ? "clicked" : ""}`} onClick={() => { setActive("addmember"); setSidebar(false) }}><PersonAddIcon className='dashboard-option-icon' /> Add Member </p>
                     <p className={`dashboard-option ${active === "returntransaction" ? "clicked" : ""}`} onClick={() => { setActive("returntransaction"); setSidebar(false) }}><AssignmentReturnIcon className='dashboard-option-icon' /> Return </p>
+                    <p className={`dashboard-option ${active === "bulkbooks" ? "clicked" : ""}`} onClick={() => { setActive("bulkbooks"); setSidebar(false) }}><LibraryBooksIcon className='dashboard-option-icon' /> Bulk Books </p>
                     <p className={`dashboard-option`} onClick={logout}><PowerSettingsNewIcon className='dashboard-option-icon' /> Log out </p>
 
                 </div>
@@ -76,6 +78,9 @@ function AdminDashboard() {
                     </div>
                     <div className="dashboard-addmember-content" style={active !== "returntransaction" ? { display: 'none' } : {}}>
                         <Return />
+                    </div>
+                    <div className="dashboard-addmember-content" style={active !== "bulkbooks" ? { display: 'none' } : {}}>
+                        <BulkBooks />
                     </div>
                 </div>
             </div>
